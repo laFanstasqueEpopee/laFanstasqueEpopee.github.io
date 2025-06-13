@@ -1,5 +1,5 @@
 {
-  "name": "github-pages",
+  "name": "tidal-transit",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.8"
-  },
-  "packageManager": "npm"
+    "astro": "^5.9.2"
+  }
 }
