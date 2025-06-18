@@ -1,5 +1,25 @@
 ---
+import '../styles/global.css'
+const pageTitle = "A propos";
+
+const identite = {
+  prenom: "Thomas",
+  nom: "Gandou",
+  metier: "inconnu",
+  hobbies: ["musique", "trekking", "cinema"],
+};  
+
+const competences = ["programmation", "ecriture", "blabla"];
+
+const content = true;
+const fini = false;
+const objectif = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
+
 <a href="/">Accueil</a>
 <a href="/about/">A propos</a>
 <a href="/blog/">Blog</a>
@@ -10,12 +30,36 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} >
-    <title>Astro</title>
+    <title>{pageTitle}</title>
+    <style define:vars={{skillColor, fontWeight, textCase}}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+      }
+    </style>
   </head>
   <body>
-    <h1>A propos</h1>
+    <h1>{pageTitle}</h1>
     <h2>Ceci est un test</h2>
     <p>Le but est de pouvoir m'exercer &agrave; la pratique du d&eacute;veloppement dans le framework Astro</p>
     <p>Pour l'instant, rien de bien compliqu&eacute; !</p>
+    <p>Voici quelques informations &agrave; mon propos :</p>
+    <ul>
+      <li>Mon nom est {identite.prenom} {identite.nom}</li>
+      <li>Mon metier actuellement : {identite.metier}</li>
+      <li>Mes passions sont :
+        <ul>
+          {identite.hobbies.map((hobby) => <li class="skill">{hobby}</li>)}
+        </ul>
+      </li>
+    </ul>
+    {content && <p>Je suis content d'apprendre ASTRO !</p>}
+    {fini && <p>J'ai termin&eacute; le tuto ASTRO !</p>}
+    {objectif === 3 ? <p>L'objectif est de le finir dans 3 jours.</p>: <p>Je n'ai pas de date pour l'objectif</p>}
   </body>
 </html>
