@@ -13,9 +13,84 @@ body {
 
 * {
   box-sizing: border-box;
+  /*Le padding est inclu dans la taille définie pour tous les éléments (si width = 100, la largeur 
+  de l'objet sera toujours 100 quelle que soit la valeur du padding*/
 }
 
 h1 {
   margin: 1rem 0;
   font-size: 2.5rem;
+}
+
+/* nav styles */
+
+.hamburger {
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  display: block;
+  width: 40px;
+  height: 5px;
+  margin-bottom: 10px;
+  background-color: #ff9776;
+}
+
+.nav-links {
+  width: 100%;
+  top: 5rem;
+  left: 48px;
+  background-color: #ff9776;
+  display: none;
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #ff9776;
+}
+
+
+.expanded {
+  display: unset;
+  /* la valeur unset provoque que les éléments de la classe expanded hérite de la valeur de la 
+  propriété display de l'élément parent dans notre tutoriel, il s'agit de l'élément <nav>*/
+}
+
+/* Le bloc de code suivant conditionne les règles CSS suivantes
+Il faut que la page soit chargée sur un écran et que celui-ci ait une largeur min de 636px
+la @media est une at-rule et en l'occurrence une media query*/
+@media screen and (min-width: 636px) {
+  .nav-links {
+    margin-left: 5em;
+    /*display block ==> l'élément prend toute la largeur de la page (ligne entière) */
+    display: block;
+    position: static;
+    width: auto;
+    background: none;
+  }
+
+  .nav-links a {
+    /* inline-block : s'il y a plusieurs éléments a contenus dans le bloc parent, ceux-ci seront
+    mis sur une même ligne mais s'afficheront sous la forme d'un bloc dont on peut paramétrer la 
+    largeur et la hauteur */
+    display: inline-block;
+    padding: 15px 20px;
+  }
+
+  /* Signifie que le hamburger ne s'affiche pas sur les écran dont la largeur est > 636px*/
+  .hamburger {
+    display: none;
+  }
 }
