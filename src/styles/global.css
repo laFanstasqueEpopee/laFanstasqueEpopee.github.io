@@ -68,6 +68,15 @@ h1 {
   propriété display de l'élément parent dans notre tutoriel, il s'agit de l'élément <nav>*/
 }
 
+html.dark {
+  background-color: #000000;
+  color: #fff;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}
+
 /* Le bloc de code suivant conditionne les règles CSS suivantes
 Il faut que la page soit chargée sur un écran et que celui-ci ait une largeur min de 636px
 la @media est une at-rule et en l'occurrence une media query*/
