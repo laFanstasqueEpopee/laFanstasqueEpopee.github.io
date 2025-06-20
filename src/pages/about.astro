@@ -1,7 +1,5 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro'
-import '../styles/global.css'
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "A propos";
 
@@ -23,14 +21,8 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} >
-    <title>{pageTitle}</title>
-    <style define:vars={{skillColor, fontWeight, textCase}}>
+<BaseLayout>
+  <style is:global define:vars={{skillColor, fontWeight, textCase}}>
       h1 {
         color: purple;
         font-size: 4rem;
@@ -40,12 +32,8 @@ const textCase = "uppercase";
         font-weight: var(--fontWeight);
         text-transform: var(--textCase);
       }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <h1>{pageTitle}</h1>
-    <h2>Ceci est un test</h2>
+  </style>
+  <h2>Ceci est un test</h2>
     <p>Le but est de pouvoir m'exercer &agrave; la pratique du d&eacute;veloppement dans le framework Astro</p>
     <p>Pour l'instant, rien de bien compliqu&eacute; !</p>
     <p>Voici quelques informations &agrave; mon propos :</p>
@@ -61,9 +49,4 @@ const textCase = "uppercase";
     {content && <p>Je suis content d'apprendre ASTRO !</p>}
     {fini && <p>J'ai termin&eacute; le tuto ASTRO !</p>}
     {objectif === 3 ? <p>L'objectif est de le finir dans 3 jours.</p>: <p>Je n'ai pas de date pour l'objectif</p>}
-    <Footer/>
-    <script>
-      import '../scripts/menu.js';
-    </script>
-  </body>
-</html>
+</BaseLayout>

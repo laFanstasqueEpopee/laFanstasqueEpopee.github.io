@@ -6,6 +6,7 @@ import '../styles/global.css'
 
 
 const pageTitle = "Mon premier blog";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 ---
 
 <html lang="fr">
@@ -21,9 +22,7 @@ const pageTitle = "Mon premier blog";
     <h1>{pageTitle}</h1>
     <p>Voici une &eacute;bauche de mon premier blog !</p>
     <ul>
-      <a href="/posts/post-1/">Post n&deg; 1</a>
-      <a href="/posts/post-2/">Post n&deg; 2</a>
-      <a href="/posts/post-3/">Post n&deg; 3</a>
+      {allPosts.map((post: any) => <li><a href={post.url}>{post.frontmatter.title} by {post.frontmatter.author} ({post.frontmatter.pubDate.toString().slice(0,10)})</a></li>)}
     </ul>
     <Footer/>
     <script>
