@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPost from '../../components/BlogPost.astro';
+
+//Invesitguer le export async
+export async function getStaticPaths() {
+    const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+    //Construction de la liste de tous les tags (liste rendue flat (on supprime la profondeur) 
+    // et les éléments en double sont supprimés ( opérateur ...new))
+    const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
+    
+    //Pour chaque tag, on retourne la liste de tous les posts qui contiennent le tag
+    return uniqueTags.map((tag) => {
+        //filtrage des posts pour un tag donné
+        const filteredPosts = allPosts.filter((post: any) => post.frontmatter.tags?.includes(tag));
+        //On retourne le tag ==> permet de générer la page de manière dynamique et la liste des posts
+        return {
+            params: {tag},
+            props: {posts: filteredPosts}
+        };
+  });
+}
+
+//On récupère les valeurs pour pouvoir les utiliser dans notre HTML
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+
+---
+<BaseLayout pageTitle={tag}>
+  <p>Posts tagged with {tag}</p>
+  <ul>
+    {posts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} author={post.frontmatter.author} pubDate={post.frontmatter.pubDate.toString().slice(0,10)}/>)}
+  </ul>
+</BaseLayout>
