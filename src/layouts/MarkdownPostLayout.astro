@@ -1,8 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from "./BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 const { frontmatter } = Astro.props;
-const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: true }));
+const allPosts = await getCollection("blog");
 
 ---
 
@@ -14,13 +15,13 @@ const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: 
     <slot />
     <p>Articles connexes</p>
     <div class="tags">
-    {frontmatter.tags.map((tag) => (
+    {frontmatter.tags.map((tag: any) => (
         <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>)
     )}
     </div>
     <p>Découvrez mes autres posts :</p>
     <ul>
-        {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} author={post.frontmatter.author} pubDate={post.frontmatter.pubDate.toString().slice(0,10)}/>)}
+        {allPosts.map((post: any) => <BlogPost url={`/posts/${post.id}`} title={post.data.title} author={post.data.author} pubDate={post.data.pubDate.toString().slice(0,10)}/>)}
     </ul>
 </BaseLayout>
 <style>
