@@ -9,7 +9,7 @@ const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: 
 <BaseLayout pageTitle={frontmatter.title}>
     <p>Written by {frontmatter.author}</p>
     <p>in : {frontmatter.location}</p>
-    <p>Published on: {frontmatter.pubDate.toString().slice(0,10)}</p>
+    <p>Published on: {frontmatter.pubDate.toLocaleDateString()}</p>
     <p><em>{frontmatter.description}</em></p>
     <slot />
     <p>Articles connexes</p>
